@@ -3,47 +3,31 @@ package arcanemaster.unit;
 import java.util.LinkedList;
 import java.util.List;
 
+import arcanemaster.map.Tile;
 import arcanemaster.unit.combat.Attack;
+import arcanemaster.unit.combat.Combatant;
 import arcanemaster.unit.combat.Resistance;
 
-/**
- * @author icarus
- *
- */
-public abstract class Unit {
+
+public class Unit implements Combatant, Moveable, Damageable{
 	
-	public enum unitclass { melee, missile, caster, support, monster, construct, ship, fortification };
-	
-	int basehealth, currenthealth;
-	int basemove = 3;
-	int basesight = 2;
-	int level = 1;  // start at 0?
-	
+	int level = 1;  
+	int experience = 0;
 	
 	Faction faction;
-	Movement movement;
-	Attack attack;
-	Resistance resistance;
-	Upkeep upkeep;
+	Profession profession;
+		
 	
-	int experience = 0;
-	String name, classification, description;
 	List<Perk> perks = new LinkedList<Perk>();
 	
-	boolean fortified = false;  // change to perk?
-	boolean sentried = false;	// change to perk?
+	boolean fortified = false;  // TODO change to perk
+	boolean sentried = false;	
 	
 	
 	
-	public Unit(){
-		this(0, 0);
-	}
-	
-	public Unit(int health, int attack){
-		currenthealth = basehealth = health;
-		this.attack = new Attack(attack);
-		currenthealth = this.basehealth;
-		currentupkeep = baseupkeep = new Upkeep(0,0,0);
+	public Unit(Profession prof, Faction faction){
+		profession = prof;
+		this.faction = faction;
 	}
 	
 	
@@ -51,48 +35,95 @@ public abstract class Unit {
 	public int attack(Unit u){
 		
 		double damage = 0.0;
+		//this.gainExp(u);
+		//u.gainExp(this);
 		
 		return (int) Math.ceil(damage);
 	}
 	
-	public void levelUp(){
+	public void gainExp(int xp){
 		
 	}
 	
 	private Upkeep calculateUpkeep(){
-		Upkeep currentupkeep = baseupkeep;
+		Upkeep currentupkeep = new Upkeep(profession.upkeep);
 		for(Perk p: perks){
 			currentupkeep.addCost(p.getUpkeep());
 		}
 		return currentupkeep;
 	}
 	
-	public Upkeep getUpkeep(){
-		return calculateUpkeep();  //TODO add Perk upkeep costs
+	private Attack calculateAttack(){
+		return profession.getAttack();	// TODO modify by perks
+	}
+	
+	private Resistance calculateResistance(){
+		Resistance res = new Resistance();	// TODO modify res by perks
+		return res;
+	}
+	
+	public Upkeep upkeep(){
+		return calculateUpkeep(); 
+	}
+	
+	public Attack attack(){
+		return calculateAttack();
 	}
 	
 	public void fortify(){
-		fortified = true;
+					// TODO add perk with time limit of 1
 	}
 	
 	public void sentry(){
 		sentried = true;
 	}
 	
-	public Faction getFaction(){
+	public Faction faction(){
 		return faction;
 	}
 	
-	public Movement getMovement(){
-		return movement;
+	public Movement movement(){
+		return profession.getMovement();	// TODO modify profession movement by perks
 	}
 	
 	public Attack getAttack(){
-		return attack;
+		return profession.getAttack();		// TODO modify profession attack by perks
 	}
 	
 	public Resistance getResistance(){
-		return resistance;
+		return calculateResistance();
+	}
+
+
+
+	@Override
+	public double costToEnter(Tile t, int previousCost) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public double costToEnter(Tile t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public double costToTravel(List<Tile> trail) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public double timeToTravel(List<Tile> trail) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

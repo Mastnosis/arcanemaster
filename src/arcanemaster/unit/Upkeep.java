@@ -12,10 +12,16 @@ public class Upkeep {
 		manacost = mana;
 	}
 	
+	public Upkeep(Upkeep upkeep){
+		goldcost = upkeep.goldCost();
+		foodcost = upkeep.foodCost();
+		manacost = upkeep.manaCost();
+	}
+	
 	public void addCost(Upkeep upkeep){
-		goldcost += upkeep.getGoldUpkeep();
-		foodcost += upkeep.getFoodUpkeep();
-		manacost += upkeep.getManaUpkeep();
+		goldcost += upkeep.goldCost();
+		foodcost += upkeep.foodCost();
+		manacost += upkeep.manaCost();
 	}
 	
 	public void addCost(int gold, int food, int mana){
@@ -28,15 +34,15 @@ public class Upkeep {
 		manacost = mana;
 	}
 	
-	public int getGoldUpkeep(){
+	public int goldCost(){
 		return goldcost;
 	}
 	
-	public int getFoodUpkeep(){
+	public int foodCost(){
 		return foodcost;
 	}
 	
-	public int getManaUpkeep(){
+	public int manaCost(){
 		return manacost;
 	}
 

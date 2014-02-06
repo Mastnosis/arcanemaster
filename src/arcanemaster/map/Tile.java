@@ -1,6 +1,6 @@
 package arcanemaster.map;
 
-import java.util.LinkedList;
+import java.util.Set;
 
 import arcanemaster.city.Building;
 import arcanemaster.city.Structure;
@@ -13,7 +13,7 @@ public class Tile {
 	Resource resource;
 	Structure structure;
 	Unit unit;
-	LinkedList<Tile> neighbors;
+	
 	
 	public Tile(){
 		this(new Terrain());
@@ -27,8 +27,8 @@ public class Tile {
 		
 	}
 	
-	public LinkedList<Tile> getNeighbors(){
-		return neighbors;
+	public Set<Tile> getNeighbors(){
+		return null;
 	}
 	
 	public int costToEnter(Unit u){
@@ -47,7 +47,7 @@ public class Tile {
 	}
 	
 	public boolean canPassThrough(Unit u){
-		if(unit.getFaction().isFriend(u)){
+		if(unit.faction().isFriend(u)){
 			return true;
 		}
 		return false;
