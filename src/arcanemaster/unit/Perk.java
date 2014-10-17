@@ -4,34 +4,28 @@ import java.util.*;
 
 public class Perk {
 	
-	LinkedList<Perk> subPerks = new LinkedList<Perk>(); //perk can be built up from multiple simpler perks
+	public enum source{ BASE, LEVEL, SPELL};
 	
-	Unit unit;
+	String name;
 	
-	Upkeep upkeep = new Upkeep(0,0,0);
+	LinkedList<Trait> traits = new LinkedList<Trait>();
+	
+	Cost upkeep = new Cost(0,0,0);
 	
 	public Perk(){
-		this(null);
-	}
-	
-	public Perk(Unit u){
-		unit = u;
-	}
-	
-	public void addPerk(Unit u){
 		
 	}
 	
-	public void removePerk(Unit u){
-		
-	}
-	
-	public void setUpkeep(Upkeep upkeep){
+	public void setUpkeep(Cost upkeep){
 		this.upkeep = upkeep;
 	}
 	
-	public Upkeep getUpkeep(){
+	public Cost getUpkeep(){
 		return upkeep;
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 }

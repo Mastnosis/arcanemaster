@@ -92,25 +92,29 @@ public class Board {
 	}
 	
 	public Set<Tile> neighbors(Tile t){
-		Set<Tile> s = new LinkedHashSet<Tile>();
-		Tile a,b,c,d,e,f;
-		int x,y;
-		if (!null == a = getTile(x, y));
-		b = getTile(x, y);
-		c = getTile(x, y);
-		d = getTile(x, y);
-		e = getTile(x, y);
-		f = getTile(x, y);
-		s.add()
-		return ring(t, 1);
+//		Set<Tile> s = new LinkedHashSet<Tile>();
+//		Tile a,b,c,d,e,f;
+//		int x,y;
+//		if (null != t){
+//			a = getTile(x, y);
+//			b = getTile(x, y);
+//			c = getTile(x, y);
+//			d = getTile(x, y);
+//			e = getTile(x, y);
+//			f = getTile(x, y);
+//			s.add(a);
+//			s.add(b);
+//		return ring(t, 1);
+		return null;
 	}
 	
 	private int getX(Tile t){
-		tiles.
+		//tiles.
+		return 0;
 	}
 	
 	private int getY(Tile t){
-		
+		return 0;
 	}
 	
 	public Set<Tile> getShortestPath(Unit traveler, int originX, int originY, int destX, int destY){

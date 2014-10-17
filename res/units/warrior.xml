@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Warrior health="25" cost="25" class="Fighter">
-
-
+<Profession name="Warrior" race="Human" health="25" cost="25" turns="3" class="MELEE" sight="2">
 	<Attack range="1">
 		<Melee value="9"></Melee></Attack>
 	<Perk name="Basic Armor">
-		<Resistance value="20" type="melee"></Resistance>
-		<Resistance value="40" type="missile"></Resistance></Perk>
+		<Resistance value="20" type="MELEE"></Resistance>
+		<Resistance value="40" type="MISSILE"></Resistance></Perk>
 	<Upkeep gold="1" food="1" mana="0"></Upkeep>
 	<GameInfo>Common fighters</GameInfo>
 	<LoreInfo>To be added...</LoreInfo>
-	<Move type="Walker" value="3"></Move></Warrior>
+	<Move type="Walker" value="3"></Move>
+</Profession>

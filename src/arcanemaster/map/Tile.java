@@ -1,9 +1,11 @@
 package arcanemaster.map;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import arcanemaster.city.Building;
 import arcanemaster.city.Structure;
+import arcanemaster.unit.Aura;
 import arcanemaster.unit.Movement;
 import arcanemaster.unit.Unit;
 
@@ -13,6 +15,8 @@ public class Tile {
 	Resource resource;
 	Structure structure;
 	Unit unit;
+	
+	Set<Aura> auri = new HashSet<Aura>();
 	
 	
 	public Tile(){
@@ -78,6 +82,14 @@ public class Tile {
 	
 	public void onExit(Unit u){
 		
+	}
+	
+	public void registerAura(Aura aura){
+		auri.add(aura);
+	}
+	
+	public void removeAura(Aura aura){
+		auri.remove(aura);
 	}
 
 }

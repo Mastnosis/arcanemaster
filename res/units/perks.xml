@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Perks>
+	<Perk name="Basic Armor">
+		<Upkeep gold="0" food="0" mana="0"></Upkeep>
+		<Resistance value="20" type="MELEE"></Resistance>
+		<Resistance value="40" type="MISSILE"></Resistance>
+	</Perk>
+	<Perk name="Advanced Armor">
+		<Resistance value="40" type="MELEE"></Resistance>
+		<Resistance value="60" type="MISSILE"></Resistance>
+	</Perk>
+	<Perk name="Thick Hide">
+		<Resistance value="25" type="MELEE"></Resistance>
+	</Perk>
+	<Perk name="Document Inspection">
+		<Aura target="enemy" radius="1">
+			<Modifier trait="Movement" value="-2"></Modifier>
+		</Aura>
+	</Perk>
+	<Perk name="Enrage">
+		<CombatMod target="weakened" value="29"></CombatMod>
+	</Perk>
+</Perks>

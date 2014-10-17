@@ -8,6 +8,12 @@ import arcanemaster.map.Tile;
 import arcanemaster.unit.Race;
 import arcanemaster.unit.Unit;
 
+/**
+ * @author icarus
+ * 
+ * Player class wraps all communication and objects for the different players.
+ *
+ */
 public class Player {
 	
 	/*

@@ -6,7 +6,7 @@ import arcanemaster.map.Tile;
 
 public class Hero extends Unit {
 	
-	public Hero(Profession myclass, Faction faction) {
+	public Hero(Minion myclass, Faction faction) {
 		super(myclass, faction);
 		// TODO Auto-generated constructor stub
 	}

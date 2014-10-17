@@ -5,17 +5,19 @@ import java.util.List;
 
 import arcanemaster.map.Tile;
 import arcanemaster.unit.combat.Attack;
+import arcanemaster.unit.combat.CombatMod;
 import arcanemaster.unit.combat.Combatant;
 import arcanemaster.unit.combat.Resistance;
 
 
-public class Unit implements Combatant, Moveable, Damageable{
+public class Unit implements Combatant, Moveable{
 	
 	int level = 1;  
 	int experience = 0;
+	int wounds = 0;
 	
 	Faction faction;
-	Profession profession;
+	Minion minion;
 		
 	
 	List<Perk> perks = new LinkedList<Perk>();
@@ -25,8 +27,8 @@ public class Unit implements Combatant, Moveable, Damageable{
 	
 	
 	
-	public Unit(Profession prof, Faction faction){
-		profession = prof;
+	public Unit(Minion type, Faction faction){
+		minion = type;
 		this.faction = faction;
 	}
 	
@@ -45,8 +47,8 @@ public class Unit implements Combatant, Moveable, Damageable{
 		
 	}
 	
-	private Upkeep calculateUpkeep(){
-		Upkeep currentupkeep = new Upkeep(profession.upkeep);
+	private Cost calculateUpkeep(){
+		Cost currentupkeep = new Cost(minion.upkeep);
 		for(Perk p: perks){
 			currentupkeep.addCost(p.getUpkeep());
 		}
@@ -54,7 +56,7 @@ public class Unit implements Combatant, Moveable, Damageable{
 	}
 	
 	private Attack calculateAttack(){
-		return profession.getAttack();	// TODO modify by perks
+		return minion.getAttack();	// TODO modify by perks
 	}
 	
 	private Resistance calculateResistance(){
@@ -62,7 +64,7 @@ public class Unit implements Combatant, Moveable, Damageable{
 		return res;
 	}
 	
-	public Upkeep upkeep(){
+	public Cost upkeep(){
 		return calculateUpkeep(); 
 	}
 	
@@ -83,11 +85,11 @@ public class Unit implements Combatant, Moveable, Damageable{
 	}
 	
 	public Movement movement(){
-		return profession.getMovement();	// TODO modify profession movement by perks
+		return minion.getMovement();	// TODO modify profession movement by perks
 	}
 	
 	public Attack getAttack(){
-		return profession.getAttack();		// TODO modify profession attack by perks
+		return minion.getAttack();		// TODO modify profession attack by perks
 	}
 	
 	public Resistance getResistance(){
@@ -126,5 +128,27 @@ public class Unit implements Combatant, Moveable, Damageable{
 		return 0;
 	}
 	
+	public int getCurrentHealth(){
+		return minion.hitpoints - wounds; 
+	}
+	
+	public CombatMod getCombatModifier(){
+		return null; //TODO return the combat modifiers for this unit
+	}
+
+
+
+	public void wound(int damage) {
+		wounds += damage;
+		if (getCurrentHealth() < 1){
+			this.dies();
+		}
+	}
+	
+	private void dies(){
+		
+	}
+	
+
 	
 }
