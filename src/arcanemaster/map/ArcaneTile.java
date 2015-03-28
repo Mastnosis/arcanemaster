@@ -25,11 +25,14 @@ public class ArcaneTile extends Tile{
 	}
 	
 	public ArcaneTile(Terrain terrain){
-		this(terrain, null);
+		this(terrain, Resource.NONE);
 	}
 	
 	public ArcaneTile(Terrain terrain, Resource resource){
-		
+		this.terrain = terrain;
+		this.resource = resource;
+		structure = null;
+		unit = null;
 	}
 	
 	public Set<ArcaneTile> getNeighbors(){

@@ -25,16 +25,19 @@ public class FxMapBoard extends MapBoard {
 		for(int i = 0; i < height*width; i++){
 			tiles.add(new FxTile());
 		}
+		for (Tile t : tiles) {
+			
+		}
 	}
 	
 	
 	public void draw(GraphicsContext gc){
 		for (Tile t : tiles) {
-			drawTile(gc, t);
+			drawTile(gc, (FxTile) t);
 		}
 	}
 	
-	protected void drawTile(GraphicsContext gc, Tile t){
+	protected void drawTile(GraphicsContext gc, FxTile t){
 		Point[] points = grid.getVertices(getCoordinate(t));
 		gc.fillPolygon(getXvert(points), getYvert(points), points.length);
 	}
@@ -55,13 +58,13 @@ public class FxMapBoard extends MapBoard {
 		return py;
 	}
 	
-	private Paint getColor(Terrain t){
-		Paint p;
-		switch(){
-		
-		}
-		return p;
-	}
+//	private Paint getColor(Terrain t){
+//		Paint p;
+//		switch(){
+//		
+//		}
+//		return p;
+//	}
 	
 
 }
