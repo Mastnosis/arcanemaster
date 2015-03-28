@@ -5,11 +5,12 @@ import java.util.Set;
 
 import arcanemaster.city.Building;
 import arcanemaster.city.Structure;
+import arcanemaster.map.grid.Tile;
 import arcanemaster.unit.Aura;
 import arcanemaster.unit.Movement;
 import arcanemaster.unit.Unit;
 
-public class Tile {
+public class ArcaneTile extends Tile{
 	
 	Terrain terrain;
 	Resource resource;
@@ -19,19 +20,19 @@ public class Tile {
 	Set<Aura> auri = new HashSet<Aura>();
 	
 	
-	public Tile(){
+	public ArcaneTile(){
 		this(new Terrain());
 	}
 	
-	public Tile(Terrain terrain){
+	public ArcaneTile(Terrain terrain){
 		this(terrain, null);
 	}
 	
-	public Tile(Terrain terrain, Resource resource){
+	public ArcaneTile(Terrain terrain, Resource resource){
 		
 	}
 	
-	public Set<Tile> getNeighbors(){
+	public Set<ArcaneTile> getNeighbors(){
 		return null;
 	}
 	

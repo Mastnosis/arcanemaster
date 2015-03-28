@@ -3,7 +3,9 @@ package arcanemaster.unit;
 import java.util.LinkedList;
 import java.util.List;
 
-import arcanemaster.map.Tile;
+import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.Moveable;
+import arcanemaster.map.Terrain;
 import arcanemaster.unit.combat.Attack;
 import arcanemaster.unit.combat.CombatMod;
 import arcanemaster.unit.combat.Combatant;
@@ -17,7 +19,7 @@ public class Unit implements Combatant, Moveable{
 	int wounds = 0;
 	
 	Faction faction;
-	Minion minion;
+	UnitType minion;
 		
 	
 	List<Perk> perks = new LinkedList<Perk>();
@@ -27,7 +29,7 @@ public class Unit implements Combatant, Moveable{
 	
 	
 	
-	public Unit(Minion type, Faction faction){
+	public Unit(UnitType type, Faction faction){
 		minion = type;
 		this.faction = faction;
 	}
@@ -99,7 +101,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double costToEnter(Tile t, int previousCost) {
+	public double costToEnter(Terrain t, int previousCost) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -107,7 +109,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double costToEnter(Tile t) {
+	public double costToEnter(Terrain t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -115,7 +117,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double costToTravel(List<Tile> trail) {
+	public double costToTravel(List<ArcaneTile> trail) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -123,7 +125,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double timeToTravel(List<Tile> trail) {
+	public double timeToTravel(List<ArcaneTile> trail) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

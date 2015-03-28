@@ -18,12 +18,13 @@ public class GameWizard {
 	
 	public void createGame(){
 		Game game = new Game(createPlayers(), initializeMap(), setVictoryConditions());
-		(new Thread(game)).start();
+		game.start();
+	//	(new Thread(game)).start();
 	}
 	
 	private Victory setVictoryConditions(){
 		System.out.println("Setting Victory Conditions.");
-		return null;
+		return new Victory();
 	}
 	
 	private Set<Player> createPlayers(){

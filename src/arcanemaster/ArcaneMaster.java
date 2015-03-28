@@ -1,10 +1,12 @@
 package arcanemaster;
 
+import javafx.application.Application;
+import arcanemaster.ui.fx.FxArcaneMaster;
+
 public class ArcaneMaster {
 
 	public static void main(String[] args) {
-		GameWizard setup = new GameWizard();
-		setup.createGame();
+		Application.launch(FxArcaneMaster.class, args);
 	}
 
 }

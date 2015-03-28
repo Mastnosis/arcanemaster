@@ -4,9 +4,11 @@ import java.util.*;
 
 public class Perk {
 	
-	public enum source{ BASE, LEVEL, SPELL};
+	public enum Source{ BASE, LEVEL, SPELL, AURA};
 	
 	String name;
+	
+	Source source;
 	
 	LinkedList<Trait> traits = new LinkedList<Trait>();
 	
@@ -26,6 +28,10 @@ public class Perk {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public Source getSource(){
+		return source;
 	}
 
 }

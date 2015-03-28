@@ -1,7 +1,7 @@
 package arcanemaster.unit;
 
 /**
- * Aura is any area affect ability that triggers when another unit enters within range (usually adjacent)
+ * Aura is any area affect ability around a unit that triggers when another unit enters within range (usually adjacent)
  * These can be buffs and debuffs and can affect the caster as well as friendly or enemy units.
  *
  * Auras will have to be registered with the tiles they affect and a check for each unit that enters or

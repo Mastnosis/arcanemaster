@@ -37,15 +37,15 @@ public class Resistance {
 	/*
 	 * just testing to verify output values are correct.  Test should be moved to 
 	 */
-	public static void main(String[] args){
-		Resistance res = new Resistance();
-		for(int i = -3; i < 10; i++){
-			//res.setResistance(Element.MELEE, i*25);
-			//System.out.print(res.getResistance(Element.MELEE) + ":  ");
-			System.out.println(i*25 + ":  " + Resistance.getMultiplier(i*25));
-			//System.out.println(Math.pow(2,-i/2));
-		}
-	}
+//	public static void main(String[] args){
+//		Resistance res = new Resistance();
+//		for(int i = -3; i < 10; i++){
+//			//res.setResistance(Element.MELEE, i*25);
+//			//System.out.print(res.getResistance(Element.MELEE) + ":  ");
+//			System.out.println(i*25 + ":  " + Resistance.getMultiplier(i*25));
+//			//System.out.println(Math.pow(2,-i/2));
+//		}
+//	}
 		
 
 }

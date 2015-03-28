@@ -14,7 +14,7 @@ import org.xml.sax.ext.DefaultHandler2;
 import arcanemaster.unit.combat.Attack;
 
 
-public class MinionHandler extends DefaultHandler2 {
+public class UnitHandler extends DefaultHandler2 {
 	
 	Document dom;
 	
@@ -53,7 +53,7 @@ public class MinionHandler extends DefaultHandler2 {
 				Element el = (Element)nl.item(i);
 
 				//get the Employee object
-				Minion p = getProfession(el);
+				UnitType p = getProfession(el);
 
 
 			}
@@ -78,7 +78,7 @@ public class MinionHandler extends DefaultHandler2 {
 	 * @param el
 	 * @return
 	 */
-	private Minion getProfession(Element el) {
+	private UnitType getProfession(Element el) {
 		String name = el.getAttribute("name");
 		int health  = Integer.parseInt(el.getAttribute("health"));
 		int cost    = Integer.parseInt(el.getAttribute("cost"));
@@ -89,7 +89,7 @@ public class MinionHandler extends DefaultHandler2 {
 		String lore = getTextValue(el, "LoreInfo");
 
 		
-		Minion p = new Minion(name, health, cost, sight, new Cost(), 
+		UnitType p = new UnitType(name, health, cost, sight, new Cost(), 
 										new Attack(), Race.valueOf(race), description, lore);
 
 		return p;

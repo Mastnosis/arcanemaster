@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Unit type="Troll" race="Monster" health="50" cost="200" turns="4" class="MELEE" sight="2">
+	<Attack range="1">
+		<Melee value="15"></Melee></Attack>
+	<Perk name="Demolisher">
+		<CombatMod target="city" value="1.5"></CombatMod></Perk>
+	<Perk name="Regeneration">
+		<Healing target="self">8</Healing></Perk>
+	<Perk name="Thick Hide">
+		<Resistance value="25" type="MELEE"></Resistance>
+	</Perk>
+	<Upkeep gold="4" food="2" mana="0"></Upkeep>
+	<Upgrade>Old Trolls</Upgrade>
+	<Description>Big nasty trolls</Description>>
+	<Lore>To be added...</Lore>>
+	<Move type="Walker" value="3"></Move>
+</Unit>

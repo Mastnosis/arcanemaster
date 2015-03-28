@@ -1,6 +1,6 @@
 package arcanemaster.unit;
 
-import arcanemaster.map.Tile;
+import arcanemaster.map.ArcaneTile;
 
 public class Movement {
 	
@@ -8,12 +8,11 @@ public class Movement {
 	
 	
 	public Movement(){
-		this(0);
+		this(3);
 	}
 	
 	public Movement(int movementspeed){
 		basemove = movementspeed;
-		consumed = 0;
 	}
 	
 	public int getMovementPerTurn(){
@@ -29,7 +28,7 @@ public class Movement {
 		consumed = 0;
 	}
 	
-	public int costToEnterHex(Tile t){
+	public int costToEnterHex(ArcaneTile t){
 		return 1;
 	}
 
