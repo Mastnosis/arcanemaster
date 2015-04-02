@@ -1,31 +1,64 @@
 package arcanemaster.ui.fx;
 
+import java.awt.Point;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import arcanemaster.map.MapBoard;
+import arcanemaster.map.grid.Grid;
+import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.HexGrid;
 
 
 public class FxArcaneMaster extends Application {
 	
+	private static final int HEIGHT = 10;
+	private static final int WIDTH = 12;
+	private Grid grid = new HexGrid();
+	
 	private MapBoard.Size size = MapBoard.Size.SMALL;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Drawing Operations Test");
+		primaryStage.setTitle("Arcane Master");
         Group root = new Group();
-        Canvas canvas = new Canvas(1280, 720);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        FxMapBoard map = new FxMapBoard(new HexGrid(), size.dimensionY(), size.dimensionX(), false, false);
-        map.draw(gc);
+        
+       
+//        for (int i = 0; i < HEIGHT*WIDTH; i++){
+//        	Polygon p = getPoly(i);
+//        	root.getChildren().add(p);
+//        }
+        
+       // Canvas canvas = new Canvas(1280, 720);
+       // GraphicsContext gc = canvas.getGraphicsContext2D();
+        FxMapBoard map = new FxMapBoard(new HexGrid(), size.dimensionY(), size.dimensionX(), false, false, root);
+        //map.draw(gc);
         // drawShapes(gc);
-        root.getChildren().add(canvas);
+        // root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+	}
+
+	private Polygon getPoly(int index) {
+		Polygon p = new Polygon();
+		int x = index%WIDTH;
+		int y = index/WIDTH;
+		p.getPoints().addAll(getVerticesAsDouble(grid.getVertices(new GridCoordinate(x,y))));
+		return p;
+	}
+	
+	private Double[] getVerticesAsDouble(Point[] points){
+		Double[] vertices = new Double[points.length*2];
+		for (int i = 0; i < points.length; i++){
+			vertices[i*2]= (double)points[i].x;
+			vertices[i*2+1] = (double)points[i].y;
+		}
+		return vertices;
 	}
 
 //	private void drawShapes(GraphicsContext gc) {

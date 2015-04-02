@@ -3,34 +3,47 @@ package arcanemaster.ui.fx;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import arcanemaster.map.MapBoard;
 import arcanemaster.map.grid.Grid;
+import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.Tile;
 
 public class FxMapBoard extends MapBoard {
 	
-	public FxMapBoard(Grid grid, int height, int width, boolean wrapX, boolean wrapY){
+	
+	
+	public FxMapBoard(Grid grid, int height, int width, boolean wrapX, boolean wrapY, Group group){
 		this.height = height;
 		this.width = width;
 		this.grid = grid;
 		wrapsX = wrapX;
 		wrapsY = wrapY;
-		initTiles();
+		
+		initTiles(group);
 	}
 	
-	@Override
-	protected void initTiles() {
+	private void initTiles(Group group) {
 		tiles = new ArrayList<Tile>(height*width);
 		for(int i = 0; i < height*width; i++){
-			tiles.add(new FxTile());
+			FxTile t = new FxTile(getVertices(i));
+			tiles.add(t);
+			group.getChildren().add(t.getPolygon());
 		}
-		for (Tile t : tiles) {
-			
-		}
+	}
+
+	@Override
+	protected void initTiles() {
+		
 	}
 	
 	
+	private Point[] getVertices(int i) {
+		Point[] p = grid.getVertices(new GridCoordinate(i%width, i/width));
+		return p;
+	}
+
 	public void draw(GraphicsContext gc){
 		for (Tile t : tiles) {
 			drawTile(gc, (FxTile) t);

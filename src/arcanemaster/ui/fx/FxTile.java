@@ -16,9 +16,8 @@ public class FxTile extends ArcaneTile{
 	
 	Polygon hex;
 	
-	public FxTile() {
-		super();
-		// TODO Auto-generated constructor stub
+	public FxTile(Point[] vertices) {
+		this(new Terrain(), vertices);
 	}
 	
 	public FxTile(Terrain terrain, Point[] vertices) {
@@ -28,7 +27,8 @@ public class FxTile extends ArcaneTile{
 	
 	public FxTile(Terrain terrain, Resource resource, Point[] vertices) {
 		super(terrain, resource);
-		hex = new Polygon(getVertices(vertices));
+		hex = new Polygon();
+		hex.getPoints().addAll(getVertices(vertices));
 	}
 
 	
@@ -55,12 +55,11 @@ public class FxTile extends ArcaneTile{
 //		return py;
 //	}
 	
-	private double[] getVertices(Point[] points){
-		double[] vertices = new double[points.length*2];
-		for (int i = 0; i < vertices.length; i++){
-			vertices[i]= (double)points[i].x;
-			i++;
-			vertices[i] = (double)points[i].y;
+	private Double[] getVertices(Point[] points){
+		Double[] vertices = new Double[points.length*2];
+		for (int i = 0; i < points.length; i++){
+			vertices[i*2]= (double)points[i].x;
+			vertices[i*2+1] = (double)points[i].y;
 		}
 		return vertices;
 	}
