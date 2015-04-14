@@ -60,5 +60,13 @@ public class Player {
 		System.out.println(playername + " is completeing turn.");
 		
 	}
+	
+	public void notify(String message){
+		
+	}
+	
+	public void doCommand(String command){
+		
+	}
 
 }

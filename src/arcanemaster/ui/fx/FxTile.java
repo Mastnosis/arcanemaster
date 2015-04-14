@@ -3,6 +3,7 @@ package arcanemaster.ui.fx;
 import java.awt.Point;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import arcanemaster.map.ArcaneTile;
 import arcanemaster.map.Resource;
@@ -17,17 +18,18 @@ public class FxTile extends ArcaneTile{
 	Polygon hex;
 	
 	public FxTile(Point[] vertices) {
-		this(new Terrain(), vertices);
+		this(new FxTerrain(), vertices);
 	}
 	
-	public FxTile(Terrain terrain, Point[] vertices) {
+	public FxTile(FxTerrain terrain, Point[] vertices) {
 		this(terrain, Resource.NONE, vertices);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public FxTile(Terrain terrain, Resource resource, Point[] vertices) {
+	public FxTile(FxTerrain terrain, Resource resource, Point[] vertices) {
 		super(terrain, resource);
 		hex = new Polygon();
+		hex.setFill(terrain.getColor());
 		hex.getPoints().addAll(getVertices(vertices));
 	}
 
@@ -55,6 +57,12 @@ public class FxTile extends ArcaneTile{
 //		return py;
 //	}
 	
+	@Override
+	public void setTerrain(Terrain terrain) {
+		super.setTerrain(terrain);
+		hex.setFill(((FxTerrain) terrain).getColor());
+	}
+
 	private Double[] getVertices(Point[] points){
 		Double[] vertices = new Double[points.length*2];
 		for (int i = 0; i < points.length; i++){

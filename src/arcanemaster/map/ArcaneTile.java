@@ -35,6 +35,30 @@ public class ArcaneTile extends Tile{
 		unit = null;
 	}
 	
+	public Terrain getTerrain() {
+		return terrain;
+	}
+
+	public void setTerrain(Terrain terrain) {
+		this.terrain = terrain;
+	}
+
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+
+	public Structure getStructure() {
+		return structure;
+	}
+
+	public void setStructure(Structure structure) {
+		this.structure = structure;
+	}
+
 	public Set<ArcaneTile> getNeighbors(){
 		return null;
 	}

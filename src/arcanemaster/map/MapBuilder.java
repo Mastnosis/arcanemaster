@@ -81,10 +81,22 @@ public class MapBuilder {
 		grid = g;
 	}
 	
+	public void forrested(int percent){
+		
+	}
+	
+	public void lava(int percent){
+		
+	}
+	
 	public MapBoard buildMap(){
 		MapBoard map = new MapBoard(grid, height, width, wrapX, wrapY);
 		createMap(map.allTiles());
 		return map;
+	}
+	
+	public Tile[] build(){
+		return null;
 	}
 
 	private void createMap(Tile[] tiles) {

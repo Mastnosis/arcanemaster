@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * @author icarus
  * 
- * Faction class classifies units as monster, neurtral or player controlled as well
+ * Faction class classifies units as monster, neutral or player controlled as well
  * as traits such as colors used to distinguish between them.
  *
  */

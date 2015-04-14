@@ -27,15 +27,15 @@ public class Combat {
 	
 	public static void initiate(Combatant attacker, Combatant defender){
 		if (attacker.getAttack() instanceof RangedAttack) {
-			defender.wound(strike(attacker.getAttack(),defender.getResistance(), getMod(attacker, defender)));
+			defender.wound(strike(attacker.getAttack(),defender.getResistance(), getCombatModifier(attacker, defender)));
 		} else {
-			defender.wound(strike(attacker.getAttack(),defender.getResistance(), getMod(attacker, defender)));
-			attacker.wound(strike(defender.getAttack(),attacker.getResistance(), getMod(attacker, defender)));
+			defender.wound(strike(attacker.getAttack(),defender.getResistance(), getCombatModifier(attacker, defender)));
+			attacker.wound(strike(defender.getAttack(),attacker.getResistance(), getCombatModifier(attacker, defender)));
 		}
 	}
 	
-	private static double getMod(Combatant attacker, Combatant defender) {
-		
+	private static double getCombatModifier(Combatant attacker, Combatant defender) {
+		//TODO return modifier based on terrain and perks/spells/aura
 		return 1.0;
 	}
 
