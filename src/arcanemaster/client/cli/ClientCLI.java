@@ -8,11 +8,12 @@ import arcanemaster.api.GameCreator;
 import arcanemaster.api.GameSettings;
 import arcanemaster.api.PlayerCreator;
 import arcanemaster.api.PlayerSettings;
+import arcanemaster.client.ActionAPIEncoder;
+import arcanemaster.client.GameListenerDecoder;
 import arcanemaster.client.LobbyClient;
 import arcanemaster.client.LocalLobbyClient;
 
 public class ClientCLI {
-	public class FakeGameCLI {}
 	
 	private boolean running = true;
 	private String prompt = "$ ";
@@ -20,7 +21,8 @@ public class ClientCLI {
 	private LobbyClient lobbyClient = null;
 	private PlayerCreator playerCreator = null;
 	private GameCreator gameCreator = null;
-	private FakeGameCLI game = null;
+	private GameClientCLI gameClient = null;
+	private GameListenerDecoder decoder = null;
 	
 	private PlayerSettings playerSettings= new PlayerSettings(); // Default player settings.
 	private GameSettings gameSettings = new GameSettings();      // Default game settings.
@@ -48,8 +50,14 @@ public class ClientCLI {
 	public void launchPlayerCreator() {}
 
 	public void parseInput(String input) {
-		if (game != null) {
-			
+		if (gameClient != null) {
+			if (input.equals("quit") || input.equals("exit")) {
+				System.out.println("Quitting game...");
+				gameClient = null;
+			}
+			else {
+				gameClient.parseInput(input);
+			}
 		}
 		else if (gameCreator != null) {
 			if (input.equals("done")) {
@@ -81,6 +89,11 @@ public class ClientCLI {
 			if (input.equals("start")) {
 				System.out.println("Starting game");
 				System.out.println("...we thought, but we don't know how to do that yet.");
+				
+				//TODO: figure out the player id.
+				ActionAPIEncoder api = new ActionAPIEncoder(-1);
+				gameClient = new GameClientCLI(api);
+				decoder = new GameListenerDecoder(gameClient);
 			}
 			else {
 				System.out.println("unknown command D: " + input);

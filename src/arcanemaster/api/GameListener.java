@@ -1,6 +1,12 @@
 package arcanemaster.api;
 
 public interface GameListener {
+	
+    ////////////////////////////////////////////////////////////////////////////////
+    // Game initialization
+	
+	void onInitializeGame(String data);
+	
 
     ////////////////////////////////////////////////////////////////////////////////
     // Non-API related callbacks.
@@ -17,11 +23,11 @@ public interface GameListener {
     void onHeroHired(int playerId, int heroId);
     void onHeroDismissed(int playerId, int heroId);
 
-    void onOfferSent();
+    void onOfferSent(int fromPlayerId, int toPlayerId /* content */);
     void onResearchSet(int playerId, int spellId);
     void onSpellPrepared(int playerId, int spellId);
     void onSpellCancelled(int playerId);
-    void onSpellCast(int playerId /* Need target info */);
+    void onSpellCast(int playerId, int spellId /* target info */);
 
     void onCityDestroyed(int playerId, int cityId);
     void onBuildingDestroyed(int playerId, int buildingId);
@@ -40,7 +46,7 @@ public interface GameListener {
      Unit actions include attacking, building cities, fortifying, and anything
      else a unit can do, with the exception of moving.
      */
-    void onUnitAction(int playerId, int unitId, int actionId /* Need target information */);
+    void onUnitAction(int playerId, int unitId, int actionId /* target info */);
     void onUnitMoved(int playerId, int unitId, int row, int col, int shard);
 
     /*

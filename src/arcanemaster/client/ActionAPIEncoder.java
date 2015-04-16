@@ -9,7 +9,7 @@ import arcanemaster.api.ActionResult;
  * For each method on the ActionAPI, creates a plain text message and sends
  * it through a network connection.
  */
-public class ActionAPIMessenger implements ActionAPI {
+public class ActionAPIEncoder implements ActionAPI {
     private class MessageBuilder {
         private String functionName = "";
         private ArrayList<String> arguments = new ArrayList<String>();
@@ -36,7 +36,7 @@ public class ActionAPIMessenger implements ActionAPI {
 
     private int playerId = -1;
 
-    public ActionAPIMessenger(int playerId) {
+    public ActionAPIEncoder(int playerId) {
         this.playerId = playerId;
         
         //TODO: setup the connection with the server.
