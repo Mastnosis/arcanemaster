@@ -31,7 +31,7 @@ public class MapBoard {
 		}
 	}
 	
-	protected ArrayList<Tile> tiles;
+	protected ArrayList<ArcaneTile> tiles;
 	
 	protected Grid grid;
 	
@@ -60,9 +60,9 @@ public class MapBoard {
 	}
 
 	protected void initTiles() {
-		tiles = new ArrayList<Tile>(height*width);
+		tiles = new ArrayList<ArcaneTile>(height*width);
 		for(int i = 0; i < height*width; i++){
-			tiles.add(new Tile());
+			tiles.add(new ArcaneTile());
 		}
 	}
 	
@@ -92,8 +92,8 @@ public class MapBoard {
 		return neighbors;
 	}
 
-	public Tile[] allTiles() {
-		return (Tile[]) tiles.toArray();
+	public ArcaneTile[] allTiles() {
+		return (ArcaneTile[]) tiles.toArray();
 	}
 	
 	public GridCoordinate getCoordinate(Tile t){

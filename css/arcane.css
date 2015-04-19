@@ -1,0 +1,5 @@
+.default-hex {
+	-fx-fill: green;
+	-fx-stroke: darkgreen;
+	-fx-stroke-width: 3;
+}

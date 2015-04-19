@@ -1,13 +1,19 @@
 package arcanemaster.map;
 
+import arcanemaster.map.Terrain.Elevation;
+
 public class Terrain {
 	
-	public enum Feature { FOREST, SWAMP, NONE };
+	// Features affect movement and combat
+	public enum Feature { FOREST, NONE };
 	
+	// Elevation affects movement and combat
 	public enum Elevation { DEEP, WATER, PLAINS, HILLS, MOUNTAINS, HIGH };
 	
-	public enum Climate { FERTILE, BARREN, DESERT, ARCTIC, LAVA, DEATH, CORRUPTED, FEY };
+	// Climate affects resource production, movement and has possible additional effects such as damage or healing certain units
+	public enum Climate { FERTILE, BARREN, DESERT, ARCTIC, SWAMP, LAVA, DEATH, CORRUPTED, FEY };
 	
+	// Weather is just a concept. Weather may change climate over time and affect combat and movement
 	public enum Weather { CLEAR, HUMID, DRY, RAIN, MONSOON, HOT, COLD, SNOWING, HAIL, BLIZZARD, CALM, WINDY, TYPHOON };
 	
 	
@@ -59,6 +65,15 @@ public class Terrain {
 	
 	public boolean canBuild(){
 		return canBuild;
+	}
+
+
+	public void setElevation(Elevation e) {
+		elevation = e;
+	}
+	
+	public Elevation getElevation(){
+		return elevation;
 	}
 
 }

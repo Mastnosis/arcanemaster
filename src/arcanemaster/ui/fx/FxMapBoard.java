@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import arcanemaster.map.ArcaneTile;
 import arcanemaster.map.MapBoard;
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.GridCoordinate;
@@ -25,7 +26,7 @@ public class FxMapBoard extends MapBoard {
 	}
 	
 	private void initTiles(Group group) {
-		tiles = new ArrayList<Tile>(height*width);
+		tiles = new ArrayList<ArcaneTile>(height*width);
 		for(int i = 0; i < height*width; i++){
 			FxTile t = new FxTile(getVertices(i));
 			tiles.add(t);

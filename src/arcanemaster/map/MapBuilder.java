@@ -1,12 +1,13 @@
 package arcanemaster.map;
 
+import java.util.Random;
+
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.HexGrid;
-import arcanemaster.map.grid.Tile;
 
 public class MapBuilder {
 
-	public enum MapSize{ TINY(15, 12), SMALL(29,20), MEDIUM(46, 28), LARGE(65, 32), XLARGE(81, 40) ;
+	public enum MapSize{ TINY(15, 12), SMALL(29,20), MEDIUM(47, 28), LARGE(65, 32), XLARGE(81, 40) ;
 	private int x;
 	private int y;
 
@@ -36,11 +37,10 @@ public class MapBuilder {
 	protected boolean wrapY;
 	
 	protected Grid grid;
-	
+	// protected MapBoard map;
 	
 	
 	public MapBuilder(){
-		//size = MapSize.TINY;
 		height = MapSize.SMALL.dimensionY();
 		width = MapSize.SMALL.dimensionX();
 		type = MapType.RANDOM;
@@ -49,7 +49,7 @@ public class MapBuilder {
 		grid = new HexGrid();
 	}
 	
-	public MapBuilder(String filename){
+	/*public MapBuilder(String filename){
 		
 	}
 	
@@ -59,7 +59,7 @@ public class MapBuilder {
 	
 	public MapBuilder(int width, int height, MapType type, boolean wrapping){
 		
-	}
+	}*/
 	
 	public void wrapX(boolean b){
 		wrapX = b;
@@ -81,27 +81,45 @@ public class MapBuilder {
 		grid = g;
 	}
 	
-	public void forrested(int percent){
+	public void forrested(double percent){
 		
 	}
 	
-	public void lava(int percent){
+	public void lava(double percent){
 		
 	}
 	
-	public MapBoard buildMap(){
+	public MapBoard build(){
 		MapBoard map = new MapBoard(grid, height, width, wrapX, wrapY);
-		createMap(map.allTiles());
+		createMap(map);
 		return map;
 	}
-	
-	public Tile[] build(){
-		return null;
-	}
 
-	private void createMap(Tile[] tiles) {
-		// TODO Auto-generated method stub
+	private void createMap(MapBoard map) {
+		buildLand(map);
+		createForest(map);
+		placeResources(map);
+		createStartLocations(map);
+	}
+	
+	private void placeResources(MapBoard map){
 		
+	}
+	
+	private void createForest(MapBoard map){
+		
+	}
+	
+	private void buildLand(MapBoard map){
+		ArcaneTile[] tiles = map.allTiles();
+		Random rand = new Random();
+		for (ArcaneTile t : tiles) {
+			t.getTerrain().setElevation(Terrain.Elevation.values()[rand.nextInt(Terrain.Elevation.values().length)]);
+		}
+	}
+	
+	private void createStartLocations(MapBoard map){
+		 
 	}
 
 }
