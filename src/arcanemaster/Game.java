@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import arcanemaster.map.Board;
+import arcanemaster.player.Player;
 
 public class Game {
 
@@ -40,7 +41,7 @@ public class Game {
 			for(Player p: players){
 				p.doTurn();
 				victory.checkAll();
-				System.out.println(p.playername + " is done their turn.");
+				System.out.println(p.getName() + " is done their turn.");
 			}
 		}
 

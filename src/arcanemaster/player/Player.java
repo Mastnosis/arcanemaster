@@ -1,12 +1,15 @@
-package arcanemaster;
+package arcanemaster.player;
 
 import java.awt.Color;
 import java.util.LinkedHashSet;
 
+import arcanemaster.city.Building;
 import arcanemaster.city.City;
 import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.Location;
 import arcanemaster.unit.Race;
 import arcanemaster.unit.Unit;
+import arcanemaster.unit.UnitType;
 
 /**
  * @author icarus
@@ -34,7 +37,7 @@ public class Player {
 	private static int number = 0;
 	private int ID;
 	
-	protected String playername;
+	private String playername;
 	protected Color playercolor;
 	protected Race playerrace;
 	
@@ -44,7 +47,7 @@ public class Player {
 	
 	public Player(String name, Color color){
 		ID = number++;
-		playername = name;
+		setName(name);
 		playercolor = color;
 	}
 	
@@ -57,7 +60,7 @@ public class Player {
 	}
 	
 	public void doTurn(){
-		System.out.println(playername + " is completeing turn.");
+		System.out.println(getName() + " is completeing turn.");
 		
 	}
 	
@@ -67,6 +70,38 @@ public class Player {
 	
 	public void doCommand(String command){
 		
+	}
+	
+	public boolean move(Unit u, ArcaneTile location){  // perhaps change return type to last tile entered
+		return false;
+		
+	}
+	
+	public boolean move(Unit u, ArcaneTile[] path){  // perhaps change return type to last tile entered
+		return false;
+	}
+	
+	public boolean recruit(City c, UnitType t){
+		if(c.canRecruit(t)){
+			c.recruit(t);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean build(City c, Building b, ArcaneTile location){
+		if(c.canBuild(b, location)){
+			c.build(b, location);
+		}
+		return false;
+	}
+
+	public String getName() {
+		return playername;
+	}
+
+	public void setName(String playername) {
+		this.playername = playername;
 	}
 
 }

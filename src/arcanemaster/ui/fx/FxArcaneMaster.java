@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import arcanemaster.map.ArcaneTile;
 import arcanemaster.map.MapBoard;
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.GridCoordinate;
@@ -36,10 +37,16 @@ public class FxArcaneMaster extends Application {
         
        // Canvas canvas = new Canvas(1280, 720);
        // GraphicsContext gc = canvas.getGraphicsContext2D();
-        FxMapBoard map = new FxMapBoard(new HexGrid(), size.dimensionY(), size.dimensionX(), false, false, root);
+        //FxMapBoard map = new FxMapBoard(new HexGrid(), size.dimensionY(), size.dimensionX(), false, false, root);
         //map.draw(gc);
         // drawShapes(gc);
         // root.getChildren().add(canvas);
+        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(10).width(15).build();
+                
+        for (FxTile t : map.allTiles()) {
+			root.getChildren().add(t.getPolygon());
+		}
+        
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 	}

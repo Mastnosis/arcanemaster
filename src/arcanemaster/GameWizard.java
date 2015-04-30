@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import arcanemaster.map.Board;
+import arcanemaster.player.Player;
 
 public class GameWizard {
 	

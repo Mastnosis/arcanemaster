@@ -61,32 +61,37 @@ public class MapBuilder {
 		
 	}*/
 	
-	public void wrapX(boolean b){
+	public MapBuilder wrapX(boolean b){
 		wrapX = b;
+		return this;
 	}
 	
-	public void wrapY(boolean b){
+	public MapBuilder wrapY(boolean b){
 		wrapY = b;
+		return this;
 	}
 	
-	public void height(int h){
+	public MapBuilder height(int h){
 		height = h;
+		return this;
 	}
 	
-	public void width(int w){
+	public MapBuilder width(int w){
 		width = w;
+		return this;
 	}
 	
-	public void grid(Grid g){
+	public MapBuilder grid(Grid g){
 		grid = g;
+		return this;
 	}
 	
-	public void forrested(double percent){
-		
+	public MapBuilder forrested(double percent){
+		return this;
 	}
 	
-	public void lava(double percent){
-		
+	public MapBuilder lava(double percent){
+		return this;
 	}
 	
 	public MapBoard build(){
@@ -95,7 +100,7 @@ public class MapBuilder {
 		return map;
 	}
 
-	private void createMap(MapBoard map) {
+	protected void createMap(MapBoard map) {
 		buildLand(map);
 		createForest(map);
 		placeResources(map);
