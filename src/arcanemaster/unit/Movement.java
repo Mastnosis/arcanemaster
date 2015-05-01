@@ -1,6 +1,6 @@
 package arcanemaster.unit;
 
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 
 public class Movement {
 	
@@ -28,7 +28,7 @@ public class Movement {
 		consumed = 0;
 	}
 	
-	public int costToEnterHex(ArcaneTile t){
+	public int costToEnterHex(AmTile t){
 		return 1;
 	}
 

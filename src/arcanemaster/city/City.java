@@ -1,6 +1,6 @@
 package arcanemaster.city;
 
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 import arcanemaster.unit.UnitType;
 
 public class City {
@@ -15,12 +15,12 @@ public class City {
 		
 	}
 
-	public boolean canBuild(Building b, ArcaneTile location) {
+	public boolean canBuild(Building b, AmTile location) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void build(Building b, ArcaneTile location) {
+	public void build(Building b, AmTile location) {
 		// TODO Auto-generated method stub
 		
 	}

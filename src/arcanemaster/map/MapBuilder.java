@@ -1,5 +1,6 @@
 package arcanemaster.map;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import arcanemaster.map.grid.Grid;
@@ -38,6 +39,8 @@ public class MapBuilder {
 	
 	protected Grid grid;
 	// protected MapBoard map;
+	
+	Random rand = new Random();
 	
 	
 	public MapBuilder(){
@@ -81,6 +84,11 @@ public class MapBuilder {
 		return this;
 	}
 	
+	public MapBuilder mapType(MapType t){
+		type = t;
+		return this;
+	}
+	
 	public MapBuilder grid(Grid g){
 		grid = g;
 		return this;
@@ -116,13 +124,65 @@ public class MapBuilder {
 	}
 	
 	private void buildLand(MapBoard map){
-		ArcaneTile[] tiles = map.allTiles();
-		Random rand = new Random();
-		for (ArcaneTile t : tiles) {
-			t.getTerrain().setElevation(Terrain.Elevation.values()[rand.nextInt(Terrain.Elevation.values().length)]);
+		switch(type){
+		case ISLAND:
+			buildIslandMap(map);
+			break;
+		case CONTINENTAL:
+			buildContinentalMap(map);
+			break;
+		case LANDLOCKED:
+			buildLandLockedMap(map);
+			break;
+		case LANDMASS:
+			buildLandMassMap(map);
+			break;
+		case RANDOM:
+			buildRandomMap(map);
+			break;
 		}
 	}
 	
+	private void buildRandomMap(MapBoard map) {
+		AmTile[] tiles = map.allTiles();
+		Random rand = new Random();
+		for (AmTile t : tiles) {
+			t.getTerrain().setElevation(Terrain.Elevation.values()[rand.nextInt(Terrain.Elevation.values().length)]);
+		}
+	}
+
+	private void buildLandMassMap(MapBoard map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void buildLandLockedMap(MapBoard map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void buildContinentalMap(MapBoard map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void buildIslandMap(MapBoard map) {
+		AmTile[] tiles = map.allTiles();
+		
+		for (AmTile t : tiles) {
+			t.getTerrain().setElevation(Terrain.Elevation.DEEP);
+		}
+		int cap = tiles.length/5;
+		for (int i = 0; i < cap; i++){
+			int index = rand.nextInt(tiles.length);
+			tiles[index].getTerrain().raise();
+			for (AmTile t : map.getNeighbors(tiles[index])) {
+				t.getTerrain().raise();
+			}
+		}
+		
+	}
+
 	private void createStartLocations(MapBoard map){
 		 
 	}

@@ -3,7 +3,7 @@ package arcanemaster.map.grid;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 
 /**
  * Creates a map board that holds references to all the tiles.

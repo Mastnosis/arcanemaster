@@ -18,7 +18,7 @@ public class Board {
 	boolean horizontalwrap = false;
 	boolean verticalwrap = false;
 	
-	List<ArcaneTile> tiles;
+	List<AmTile> tiles;
 	
 	public Board(){
 		this(20, 10);
@@ -37,25 +37,25 @@ public class Board {
 	}
 	
 	private void initMap(){
-		tiles = new ArrayList<ArcaneTile>(horizontalsize*verticalsize);
+		tiles = new ArrayList<AmTile>(horizontalsize*verticalsize);
 		for(int i = 0; i < horizontalsize*verticalsize; i++){
-			tiles.add(new ArcaneTile());
+			tiles.add(new AmTile());
 		}
 	}
 	
-	public Set<ArcaneTile> getNeighbors(int h, int v){
+	public Set<AmTile> getNeighbors(int h, int v){
 		int offset = 1;  // even rows have above and below neighbors shifted one towards the negative
 		if (v %2 == 1){	// check for odd rows
 			offset = 0;
 		}
-		Set <ArcaneTile> neighbors = new LinkedHashSet<ArcaneTile>();  // edge tiles my have less than 6 neighbors otherwise a fixed array would be preferrable
+		Set <AmTile> neighbors = new LinkedHashSet<AmTile>();  // edge tiles my have less than 6 neighbors otherwise a fixed array would be preferrable
 		neighbors.add(getTile(h +1, v ));
 		neighbors.add(getTile(h -1, v));
 		neighbors.add(getTile(h - offset, v+1));
 		neighbors.add(getTile(h +1 -offset, v+1));
 		neighbors.add(getTile(h - offset, v-1));
 		neighbors.add(getTile(h +1 -offset, v-1));
-		for (ArcaneTile t: neighbors){
+		for (AmTile t: neighbors){
 			if(t == null){
 				neighbors.remove(t);	// get rid of all the null values so we don't have to deal with them in pathing calculations
 			}
@@ -63,7 +63,7 @@ public class Board {
 		return neighbors;
 	}
 	
-	public ArcaneTile getTile(int h, int v){
+	public AmTile getTile(int h, int v){
 		if(h >= 0 && h < horizontalsize){
 			if(v >= 0 && v < verticalsize){
 				return tiles.get(h + horizontalsize * v);
@@ -72,12 +72,12 @@ public class Board {
 		return null;
 	}
 	
-	public Set<ArcaneTile> radius(ArcaneTile tile, int radius){
-		Set<ArcaneTile> s = new LinkedHashSet<ArcaneTile>();
+	public Set<AmTile> radius(AmTile tile, int radius){
+		Set<AmTile> s = new LinkedHashSet<AmTile>();
 		if(radius >= 0){
 			s.add(tile);
 			for(; 0 < radius; radius--){
-				for(ArcaneTile t:s){
+				for(AmTile t:s){
 				s.addAll(neighbors(t));
 				}
 			}
@@ -85,13 +85,13 @@ public class Board {
 		return s;
 	}
 	
-	public Set<ArcaneTile> ring(ArcaneTile t, int r){
-		Set<ArcaneTile> s = radius(t,r);
+	public Set<AmTile> ring(AmTile t, int r){
+		Set<AmTile> s = radius(t,r);
 		s.removeAll(radius(t,r));
 		return s;
 	}
 	
-	public Set<ArcaneTile> neighbors(ArcaneTile t){
+	public Set<AmTile> neighbors(AmTile t){
 //		Set<Tile> s = new LinkedHashSet<Tile>();
 //		Tile a,b,c,d,e,f;
 //		int x,y;
@@ -108,27 +108,27 @@ public class Board {
 		return null;
 	}
 	
-	private int getX(ArcaneTile t){
+	private int getX(AmTile t){
 		//tiles.
 		return 0;
 	}
 	
-	private int getY(ArcaneTile t){
+	private int getY(AmTile t){
 		return 0;
 	}
 	
-	public Set<ArcaneTile> getShortestPath(Unit traveler, int originX, int originY, int destX, int destY){
+	public Set<AmTile> getShortestPath(Unit traveler, int originX, int originY, int destX, int destY){
 		int origindex = originX + horizontalsize*originY;
 		int destindex = destX + horizontalsize*destY;
-		ArcaneTile currenttile = tiles.get(origindex);
+		AmTile currenttile = tiles.get(origindex);
 				
 		// create a list of all tiles and the movement cost to each
-		Map<ArcaneTile,Integer> costs = new LinkedHashMap<ArcaneTile, Integer>();
-		Set<ArcaneTile> unvisited = new LinkedHashSet<ArcaneTile>(tiles);
+		Map<AmTile,Integer> costs = new LinkedHashMap<AmTile, Integer>();
+		Set<AmTile> unvisited = new LinkedHashSet<AmTile>(tiles);
 		// LinkedList<Tile> visited = new LinkedList<Tile>();
 		
 		// set all costs to MAXINT
-		for(ArcaneTile t: unvisited){
+		for(AmTile t: unvisited){
 			costs.put(t, Integer.MAX_VALUE);
 		}
 		
@@ -139,7 +139,7 @@ public class Board {
 		
 		while(!complete){
 			// calculate the cost of moving to all neighbors
-			for(ArcaneTile t: currenttile.getNeighbors()){
+			for(AmTile t: currenttile.getNeighbors()){
 				if (unvisited.contains(t)){
 					int turndelay = calculateDelay(costs.get(currenttile), 
 							t.costToEnter(traveler.movement()), traveler.movement());  //this needs to be calculated to account for insufficient remaining move points in a turn
@@ -161,7 +161,7 @@ public class Board {
 			// get tile with lowest move cost and set as current tile
 			int lowest = Integer.MAX_VALUE;
 			//currenttile = unvisited.;  // grab the first element
-			for(ArcaneTile t: unvisited){
+			for(AmTile t: unvisited){
 				if (costs.get(t)< lowest){
 					currenttile = t;
 				}
@@ -203,12 +203,12 @@ public class Board {
 		return delay;
 	}
 
-	private Set<ArcaneTile> determineOptimalPath(Map<ArcaneTile, Integer> movementcosts, ArcaneTile destination){
-		Set<ArcaneTile> path = new LinkedHashSet<ArcaneTile>();
+	private Set<AmTile> determineOptimalPath(Map<AmTile, Integer> movementcosts, AmTile destination){
+		Set<AmTile> path = new LinkedHashSet<AmTile>();
 		path.add(destination);
-		ArcaneTile next = destination;
+		AmTile next = destination;
 		while(movementcosts.get(next) <= 0){
-			for(ArcaneTile t: next.getNeighbors()){
+			for(AmTile t: next.getNeighbors()){
 				
 			}
 		}

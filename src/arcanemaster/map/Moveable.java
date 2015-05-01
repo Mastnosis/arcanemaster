@@ -21,12 +21,12 @@ public interface Moveable {
 	/*
 	 * Given a list of tiles in the order traversed, provide the total cost in movement.
 	 */
-	public double costToTravel(List<ArcaneTile> trail);
+	public double costToTravel(List<AmTile> trail);
 	
 	
 	/*
 	 * Given a list of tiles in the order traversed, provide the amount of turns required to 
 	 * arrive at the destination location.
 	 */
-	public double timeToTravel(List<ArcaneTile> trail);
+	public double timeToTravel(List<AmTile> trail);
 }

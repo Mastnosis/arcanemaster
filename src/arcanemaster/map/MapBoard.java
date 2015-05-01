@@ -31,7 +31,7 @@ public class MapBoard {
 		}
 	}
 	
-	protected ArrayList<ArcaneTile> tiles;
+	protected ArrayList<AmTile> tiles;
 	
 	protected Grid grid;
 	
@@ -60,23 +60,23 @@ public class MapBoard {
 	}
 
 	protected void initTiles() {
-		tiles = new ArrayList<ArcaneTile>(height*width);
+		tiles = new ArrayList<AmTile>(height*width);
 		for(int i = 0; i < height*width; i++){
-			tiles.add(new ArcaneTile());
+			tiles.add(new AmTile());
 		}
 	}
 	
-	public Tile getTile(int x, int y){
-		Tile t = null;
+	public AmTile getTile(int x, int y){
+		AmTile t = null;
 		if (0 <= x && x < width && 0 <= y && y < height){
 			t = tiles.get(x + y*width);
 		}
 		return t;
 	}
 	
-	public Set<Tile> getNeighbors(Tile t){
+	public Set<AmTile> getNeighbors(Tile t){
 		if (t == null){
-			return new HashSet<Tile>();
+			return new HashSet<AmTile>();
 		}
 		int index = tiles.indexOf(t);
 		int x = index%width;
@@ -84,16 +84,19 @@ public class MapBoard {
 		return getNeighbors(x, y);
 	}
 	
-	public Set<Tile> getNeighbors(int x, int y){
-		Set<Tile> neighbors = new HashSet<Tile>();
+	public Set<AmTile> getNeighbors(int x, int y){
+		Set<AmTile> neighbors = new HashSet<>();
 		for (GridCoordinate c : grid.neighbors(new GridCoordinate(x, y))) {
-			neighbors.add(getTile(c.x, c.y));
+			AmTile t = getTile(c.x, c.y);
+			if(t != null){
+				neighbors.add(t);
+			}
 		}
 		return neighbors;
 	}
 
-	public ArcaneTile[] allTiles() {
-		return (ArcaneTile[]) tiles.toArray();
+	public AmTile[] allTiles() {
+		return (AmTile[]) tiles.toArray();
 	}
 	
 	public GridCoordinate getCoordinate(Tile t){

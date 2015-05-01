@@ -9,8 +9,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 import arcanemaster.map.MapBoard;
+import arcanemaster.map.MapBuilder.MapType;
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.HexGrid;
@@ -19,7 +20,7 @@ import arcanemaster.map.grid.HexGrid;
 public class FxArcaneMaster extends Application {
 	
 	private static final int HEIGHT = 10;
-	private static final int WIDTH = 12;
+	private static final int WIDTH = 15;
 	private Grid grid = new HexGrid();
 	
 	private MapBoard.Size size = MapBoard.Size.SMALL;
@@ -41,7 +42,7 @@ public class FxArcaneMaster extends Application {
         //map.draw(gc);
         // drawShapes(gc);
         // root.getChildren().add(canvas);
-        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(10).width(15).build();
+        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(MapType.ISLAND).build();
                 
         for (FxTile t : map.allTiles()) {
 			root.getChildren().add(t.getPolygon());

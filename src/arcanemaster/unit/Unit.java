@@ -3,7 +3,7 @@ package arcanemaster.unit;
 import java.util.LinkedList;
 import java.util.List;
 
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 import arcanemaster.map.Moveable;
 import arcanemaster.map.Terrain;
 import arcanemaster.unit.combat.Attack;
@@ -117,7 +117,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double costToTravel(List<ArcaneTile> trail) {
+	public double costToTravel(List<AmTile> trail) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -125,7 +125,7 @@ public class Unit implements Combatant, Moveable{
 
 
 	@Override
-	public double timeToTravel(List<ArcaneTile> trail) {
+	public double timeToTravel(List<AmTile> trail) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

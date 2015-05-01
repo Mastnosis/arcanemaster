@@ -2,7 +2,7 @@ package arcanemaster.unit;
 
 import java.util.List;
 
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 
 public class Hero extends Unit {
 	

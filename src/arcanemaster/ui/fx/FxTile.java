@@ -5,7 +5,7 @@ import java.awt.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 import arcanemaster.map.Resource;
 import arcanemaster.map.Terrain;
 import arcanemaster.map.grid.Grid;
@@ -13,7 +13,7 @@ import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.HexGrid;
 import arcanemaster.map.grid.Tile;
 
-public class FxTile extends ArcaneTile{
+public class FxTile extends AmTile{
 	
 	Polygon hex;
 	

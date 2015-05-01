@@ -10,7 +10,7 @@ import arcanemaster.unit.Aura;
 import arcanemaster.unit.Movement;
 import arcanemaster.unit.Unit;
 
-public class ArcaneTile extends Tile{
+public class AmTile extends Tile{
 	
 	Terrain terrain;
 	Resource resource;
@@ -20,15 +20,15 @@ public class ArcaneTile extends Tile{
 	Set<Aura> auri = new HashSet<Aura>();
 	
 	
-	public ArcaneTile(){
+	public AmTile(){
 		this(new Terrain());
 	}
 	
-	public ArcaneTile(Terrain terrain){
+	public AmTile(Terrain terrain){
 		this(terrain, Resource.NONE);
 	}
 	
-	public ArcaneTile(Terrain terrain, Resource resource){
+	public AmTile(Terrain terrain, Resource resource){
 		this.terrain = terrain;
 		this.resource = resource;
 		structure = null;
@@ -59,7 +59,7 @@ public class ArcaneTile extends Tile{
 		this.structure = structure;
 	}
 
-	public Set<ArcaneTile> getNeighbors(){
+	public Set<AmTile> getNeighbors(){
 		return null;
 	}
 	

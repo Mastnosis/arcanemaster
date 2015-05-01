@@ -7,7 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import arcanemaster.map.ArcaneTile;
+import arcanemaster.map.AmTile;
 import arcanemaster.map.MapBoard;
 import arcanemaster.map.Terrain;
 import arcanemaster.map.grid.Grid;
@@ -38,7 +38,7 @@ public class FxMapBoard extends MapBoard {
 	}
 
 	private void initTiles(Group group) {
-		tiles = new ArrayList<ArcaneTile>(height*width);
+		tiles = new ArrayList<AmTile>(height*width);
 		for(int i = 0; i < height*width; i++){
 			FxTile t = new FxTile(getVertices(i));
 			tiles.add(t);
@@ -48,7 +48,7 @@ public class FxMapBoard extends MapBoard {
 	
 	@Override
 	protected void initTiles(){
-		tiles = new ArrayList<ArcaneTile>(height*width);
+		tiles = new ArrayList<AmTile>(height*width);
 		for(int i = 0; i < height*width; i++){
 			FxTile t = new FxTile(getVertices(i));
 			tiles.add(t);
@@ -81,15 +81,15 @@ public class FxMapBoard extends MapBoard {
 		switch(t.getTerrain().getElevation()){
 		case DEEP: p = Color.DARKBLUE;
 			break;
-		case WATER: p = Color.LIGHTBLUE;
+		case WATER: p = Color.BLUE;
 			break;
 		case PLAINS: p = Color.GREEN;
 			break;
 		case HILLS: p = Color.DARKOLIVEGREEN;
 			break;
-		case MOUNTAINS: p = Color.AZURE;
+		case MOUNTAINS: p = Color.GREY;
 			break;
-		case HIGH: p = Color.GREY;
+		case HIGH: p = Color.AZURE;
 			break;
 		default: p = Color.BLACK;
 			break;
