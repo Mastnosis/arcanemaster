@@ -89,7 +89,7 @@ public class FxMapBoard extends MapBoard {
 			break;
 		case MOUNTAINS: p = Color.GREY;
 			break;
-		case HIGH: p = Color.AZURE;
+		case HIGH: p = Color.GREY;
 			break;
 		default: p = Color.BLACK;
 			break;
