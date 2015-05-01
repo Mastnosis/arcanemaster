@@ -39,7 +39,7 @@ import java.util.Set;
 
 public class HexGrid extends Grid{
 	
-	static int size = 60;  // length in pixels of a side
+	static int size = 40;  // length in pixels of a side
 	
 	static int h = (int) (Math.sin(Math.toRadians(60))*size);
 

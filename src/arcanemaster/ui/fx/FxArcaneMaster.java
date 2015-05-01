@@ -19,8 +19,10 @@ import arcanemaster.map.grid.HexGrid;
 
 public class FxArcaneMaster extends Application {
 	
-	private static final int HEIGHT = 10;
-	private static final int WIDTH = 15;
+	private static final int HEIGHT = 20;
+	private static final int WIDTH = 29;
+	private static final MapType TYPE = MapType.LANDMASS;
+	//private static final MapType TYPE = MapType.ISLAND;
 	private Grid grid = new HexGrid();
 	
 	private MapBoard.Size size = MapBoard.Size.SMALL;
@@ -42,7 +44,7 @@ public class FxArcaneMaster extends Application {
         //map.draw(gc);
         // drawShapes(gc);
         // root.getChildren().add(canvas);
-        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(MapType.ISLAND).build();
+        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(TYPE).build();
                 
         for (FxTile t : map.allTiles()) {
 			root.getChildren().add(t.getPolygon());

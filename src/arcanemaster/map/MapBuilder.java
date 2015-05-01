@@ -152,8 +152,20 @@ public class MapBuilder {
 	}
 
 	private void buildLandMassMap(MapBoard map) {
-		// TODO Auto-generated method stub
-		
+		AmTile[] tiles = map.allTiles();
+
+		for (AmTile t : tiles) {
+			t.getTerrain().setElevation(Terrain.Elevation.WATER);
+		}
+		int cap = tiles.length/5;
+		for (int i = 0; i < cap; i++){
+			int index = rand.nextInt(tiles.length);
+			tiles[index].getTerrain().raise();
+			for (AmTile t : map.getNeighbors(tiles[index])) {
+				t.getTerrain().raise();
+			}
+		}
+
 	}
 
 	private void buildLandLockedMap(MapBoard map) {
