@@ -26,7 +26,12 @@ public class MapBuilder {
 	}
 	}
 
-	public enum MapType{ ISLAND, CONTINENTAL, LANDLOCKED, LANDMASS, RANDOM};
+	public enum MapType{ ISLAND, 		// predominately water map interspersed with islands
+						CONTINENTAL, 	// large land masses separated by water
+						LANDLOCKED, 	// predominately land map with some large bodies of water
+						LANDMASS, 		// dominated by land with only small bodies of water
+						RANDOM			// completely random terrain height
+	};
 	
 //	protected MapSize size;
 	protected MapType type;
@@ -144,7 +149,7 @@ public class MapBuilder {
 	}
 	
 	private void buildRandomMap(MapBoard map) {
-		AmTile[] tiles = map.allTiles();
+		ArrayList<AmTile> tiles = map.allTiles();
 		Random rand = new Random();
 		for (AmTile t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.values()[rand.nextInt(Terrain.Elevation.values().length)]);
@@ -152,16 +157,16 @@ public class MapBuilder {
 	}
 
 	private void buildLandMassMap(MapBoard map) {
-		AmTile[] tiles = map.allTiles();
+		ArrayList<AmTile> tiles = map.allTiles();
 
 		for (AmTile t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.WATER);
 		}
-		int cap = tiles.length/5;
+		int cap = tiles.size()/5;
 		for (int i = 0; i < cap; i++){
-			int index = rand.nextInt(tiles.length);
-			tiles[index].getTerrain().raise();
-			for (AmTile t : map.getNeighbors(tiles[index])) {
+			int index = rand.nextInt(tiles.size());
+			tiles.get(index).getTerrain().raise();
+			for (AmTile t : map.getNeighbors(tiles.get(index))) {
 				t.getTerrain().raise();
 			}
 		}
@@ -169,28 +174,29 @@ public class MapBuilder {
 	}
 
 	private void buildLandLockedMap(MapBoard map) {
-		// TODO Auto-generated method stub
+		buildLandMassMap(map);
 		
 	}
 
 	private void buildContinentalMap(MapBoard map) {
-		// TODO Auto-generated method stub
+		buildIslandMap(map);
 		
 	}
 
 	private void buildIslandMap(MapBoard map) {
-		AmTile[] tiles = map.allTiles();
+		ArrayList<AmTile> tiles = map.allTiles();
 		
 		for (AmTile t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.DEEP);
 		}
-		int cap = tiles.length/5;
+		int cap = tiles.size()/4;
 		for (int i = 0; i < cap; i++){
-			int index = rand.nextInt(tiles.length);
-			tiles[index].getTerrain().raise();
-			for (AmTile t : map.getNeighbors(tiles[index])) {
-				t.getTerrain().raise();
-			}
+			int index = rand.nextInt(tiles.size());
+			tiles.get(index).getTerrain().raise();
+			map.getNeighbors(tiles.get(index)).stream().forEach(t -> t.getTerrain().raise());
+//			for (AmTile t : map.getNeighbors(tiles[index])) {
+//				t.getTerrain().raise();
+//			}
 		}
 		
 	}

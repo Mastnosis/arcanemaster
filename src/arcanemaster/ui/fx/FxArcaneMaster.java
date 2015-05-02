@@ -21,7 +21,8 @@ public class FxArcaneMaster extends Application {
 	
 	private static final int HEIGHT = 20;
 	private static final int WIDTH = 29;
-	private static final MapType TYPE = MapType.LANDMASS;
+	//private static final MapType TYPE = MapType.LANDMASS;
+	private static final MapType TYPE = MapType.LANDLOCKED;
 	//private static final MapType TYPE = MapType.ISLAND;
 	private Grid grid = new HexGrid();
 	
@@ -46,8 +47,8 @@ public class FxArcaneMaster extends Application {
         // root.getChildren().add(canvas);
         FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(TYPE).build();
                 
-        for (FxTile t : map.allTiles()) {
-			root.getChildren().add(t.getPolygon());
+        for (AmTile t : map.allTiles()) {
+			root.getChildren().add(((FxTile)t).getPolygon());
 		}
         
         primaryStage.setScene(new Scene(root));

@@ -56,9 +56,9 @@ public class FxMapBoard extends MapBoard {
 	}
 
 	
-	public FxTile[] allTiles(){
-		return tiles.toArray(new FxTile[tiles.size()]);
-	}
+//	public ArrayList<FxTile> allTiles(){
+//		return tiles;
+//	}
 	
 	private Point[] getVertices(int i) {
 		Point[] p = grid.getVertices(new GridCoordinate(i%width, i/width));
@@ -76,31 +76,34 @@ public class FxMapBoard extends MapBoard {
 		gc.fillPolygon(getXvert(points), getYvert(points), points.length);
 	}
 	
-	protected void drawTile(FxTile t){
+	protected void setFill(FxTile t){
 		Paint p = Color.WHITE;
 		switch(t.getTerrain().getElevation()){
-		case DEEP: p = Color.DARKBLUE;
+		case DEEP: 		p = Color.BLUE;
 			break;
-		case WATER: p = Color.BLUE;
+		case WATER: 	p = Color.BLUE;
 			break;
-		case PLAINS: p = Color.GREEN;
+		case PLAINS: 	p = Color.GREEN;
 			break;
-		case HILLS: p = Color.DARKOLIVEGREEN;
+		case HILLS: 	p = Color.DARKOLIVEGREEN;
 			break;
 		case MOUNTAINS: p = Color.GREY;
 			break;
-		case HIGH: p = Color.GREY;
+		case HIGH: 		p = Color.GREY;
 			break;
-		default: p = Color.BLACK;
+		default: 		p = Color.BLACK;
 			break;
 		}
 		t.getPolygon().setFill(p);
 	}
 	
 	protected void updateTiles(){
-		for (FxTile t : allTiles()) {
-			drawTile(t);
-		}
+
+		tiles.stream().map(t -> { return (FxTile)t;}).forEach(this::setFill);
+
+		//		for (FxTile t : allTiles()) {
+		//			setFill(t);
+		//		}
 	}
 	
 	private double[] getXvert(Point[] points){

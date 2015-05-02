@@ -2,6 +2,7 @@ package arcanemaster.map;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import arcanemaster.map.grid.Grid;
@@ -95,8 +96,8 @@ public class MapBoard {
 		return neighbors;
 	}
 
-	public AmTile[] allTiles() {
-		return (AmTile[]) tiles.toArray();
+	public ArrayList<AmTile> allTiles() {
+		return tiles;
 	}
 	
 	public GridCoordinate getCoordinate(Tile t){
