@@ -1,6 +1,8 @@
 package arcanemaster.ui.fx;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -11,6 +13,7 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import arcanemaster.map.AmTile;
 import arcanemaster.map.MapBoard;
+import arcanemaster.map.MapBuilder;
 import arcanemaster.map.MapBuilder.MapType;
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.GridCoordinate;
@@ -45,10 +48,19 @@ public class FxArcaneMaster extends Application {
         //map.draw(gc);
         // drawShapes(gc);
         // root.getChildren().add(canvas);
-        FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(TYPE).build();
+        //FxMapBoard map = (FxMapBoard) new FxMapBuilder().height(HEIGHT).width(WIDTH).mapType(TYPE).build();
+        List<FxTile> tiles = new ArrayList<>();
+        for(int i = 0; i < HEIGHT; i ++){
+        	for(int j = 0; j < WIDTH; j++){
+        		FxTile t = new FxTile(grid, new GridCoordinate(j,i));
+        		tiles.add(t);
+        		root.getChildren().add(t.getPolygon());
+        	}
+        }
+        MapBoard<FxTile> map = new MapBuilder<FxTile>().height(HEIGHT).width(WIDTH).mapType(TYPE).setTiles(tiles).build();
                 
-        for (AmTile t : map.allTiles()) {
-			root.getChildren().add(((FxTile)t).getPolygon());
+        for (FxTile t : map.allTiles()) {
+			t.update();
 		}
         
         primaryStage.setScene(new Scene(root));

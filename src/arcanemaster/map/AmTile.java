@@ -5,6 +5,8 @@ import java.util.Set;
 
 import arcanemaster.city.Building;
 import arcanemaster.city.Structure;
+import arcanemaster.map.grid.Grid;
+import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.Tile;
 import arcanemaster.unit.Aura;
 import arcanemaster.unit.Movement;
@@ -22,6 +24,14 @@ public class AmTile extends Tile{
 	
 	public AmTile(){
 		this(new Terrain());
+	}
+	
+	public AmTile(Grid grid, GridCoordinate gc){
+		super(grid, gc);
+		terrain = new Terrain();
+		resource = Resource.NONE;
+		structure = null;
+		unit = null;
 	}
 	
 	public AmTile(Terrain terrain){

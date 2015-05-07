@@ -2,6 +2,7 @@ package arcanemaster.ui.fx;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,46 +15,42 @@ import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.GridCoordinate;
 import arcanemaster.map.grid.Tile;
 
-public class FxMapBoard extends MapBoard {
+public class FxMapBoard<T extends FxTile> extends MapBoard<T> {
 	
 	
 	
-	public FxMapBoard(Grid grid, int height, int width, boolean wrapX, boolean wrapY, Group group){
-		this.height = height;
-		this.width = width;
-		this.grid = grid;
-		wrapsX = wrapX;
-		wrapsY = wrapY;
-		
-		initTiles(group);
-	}
+//	public FxMapBoard(Grid grid, int height, int width, boolean wrapX, boolean wrapY, Group group){
+//		this.height = height;
+//		this.width = width;
+//		this.grid = grid;
+//		wrapsX = wrapX;
+//		wrapsY = wrapY;
+//		
+//		initTiles(group);
+//	}
 	
-	public FxMapBoard(Grid grid, int height, int width, boolean wrapX, boolean wrapY) {
-		this.height = height;
-		this.width = width;
-		this.grid = grid;
-		wrapsX = wrapX;
-		wrapsY = wrapY;
-		initTiles();
+	public FxMapBoard(List<T> tiles, Grid grid, int height, int width, boolean wrapX, boolean wrapY) {
+		super(tiles, grid, height, width, wrapX, wrapY);
+		//initTiles();
 	}
 
-	private void initTiles(Group group) {
-		tiles = new ArrayList<AmTile>(height*width);
-		for(int i = 0; i < height*width; i++){
-			FxTile t = new FxTile(getVertices(i));
-			tiles.add(t);
-			group.getChildren().add(t.getPolygon());
-		}
-	}
-	
-	@Override
-	protected void initTiles(){
-		tiles = new ArrayList<AmTile>(height*width);
-		for(int i = 0; i < height*width; i++){
-			FxTile t = new FxTile(getVertices(i));
-			tiles.add(t);
-		}
-	}
+//	private void initTiles(Group group) {
+//		tiles = new ArrayList<AmTile>(height*width);
+//		for(int i = 0; i < height*width; i++){
+//			FxTile t = new FxTile(getVertices(i));
+//			tiles.add(t);
+//			group.getChildren().add(t.getPolygon());
+//		}
+//	}
+//	
+//	@Override
+//	protected void initTiles(){
+//		tiles = new ArrayList<AmTile>(height*width);
+//		for(int i = 0; i < height*width; i++){
+//			FxTile t = new FxTile(getVertices(i));
+//			tiles.add(t);
+//		}
+//	}
 
 	
 //	public ArrayList<FxTile> allTiles(){
@@ -65,16 +62,16 @@ public class FxMapBoard extends MapBoard {
 		return p;
 	}
 
-	public void draw(GraphicsContext gc){
-		for (Tile t : tiles) {
-			drawTile(gc, (FxTile) t);
-		}
-	}
+//	public void draw(GraphicsContext gc){
+//		for (Tile t : tiles) {
+//			drawTile(gc, (FxTile) t);
+//		}
+//	}
 	
-	protected void drawTile(GraphicsContext gc, FxTile t){
-		Point[] points = grid.getVertices(getCoordinate(t));
-		gc.fillPolygon(getXvert(points), getYvert(points), points.length);
-	}
+//	protected void drawTile(GraphicsContext gc, FxTile t){
+//		Point[] points = grid.getVertices(getCoordinate(t));
+//		gc.fillPolygon(getXvert(points), getYvert(points), points.length);
+//	}
 	
 	protected void setFill(FxTile t){
 		Paint p = Color.WHITE;

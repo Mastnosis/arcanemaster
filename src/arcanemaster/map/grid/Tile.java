@@ -9,6 +9,7 @@ public class Tile {
 	
 	
 	public Tile(){
+		this(new HexGrid(), new GridCoordinate());
 		
 	}
 	

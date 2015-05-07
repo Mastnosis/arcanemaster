@@ -1,12 +1,13 @@
 package arcanemaster.map;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import arcanemaster.map.grid.Grid;
 import arcanemaster.map.grid.HexGrid;
 
-public class MapBuilder {
+public class MapBuilder<T extends AmTile> {
 
 	public enum MapSize{ TINY(15, 12), SMALL(29,20), MEDIUM(47, 28), LARGE(65, 32), XLARGE(81, 40) ;
 	private int x;
@@ -47,6 +48,8 @@ public class MapBuilder {
 	
 	Random rand = new Random();
 	
+	List<T> tiles = new ArrayList<>();
+	
 	
 	public MapBuilder(){
 		height = MapSize.SMALL.dimensionY();
@@ -69,66 +72,76 @@ public class MapBuilder {
 		
 	}*/
 	
-	public MapBuilder wrapX(boolean b){
+	public MapBuilder<T> wrapX(boolean b){
 		wrapX = b;
 		return this;
 	}
 	
-	public MapBuilder wrapY(boolean b){
+	public MapBuilder<T> wrapY(boolean b){
 		wrapY = b;
 		return this;
 	}
 	
-	public MapBuilder height(int h){
+	public MapBuilder<T> height(int h){
 		height = h;
 		return this;
 	}
 	
-	public MapBuilder width(int w){
+	public MapBuilder<T> width(int w){
 		width = w;
 		return this;
 	}
 	
-	public MapBuilder mapType(MapType t){
+	public MapBuilder<T> mapType(MapType t){
 		type = t;
 		return this;
 	}
 	
-	public MapBuilder grid(Grid g){
+	public MapBuilder<T> grid(Grid g){
 		grid = g;
 		return this;
 	}
 	
-	public MapBuilder forrested(double percent){
+	public MapBuilder<T> forrested(double percent){
 		return this;
 	}
 	
-	public MapBuilder lava(double percent){
+	public MapBuilder<T> lava(double percent){
 		return this;
 	}
 	
-	public MapBoard build(){
-		MapBoard map = new MapBoard(grid, height, width, wrapX, wrapY);
+	public MapBoard<T> build(){
+		MapBoard<T> map = new MapBoard<>(tiles, grid, height, width, wrapX, wrapY);
 		createMap(map);
 		return map;
 	}
+	
+	private List<T> createTiles(){
+		ArrayList<T> tiles = new ArrayList<>(height*width);
+		return tiles;
+	}
+	
+	public MapBuilder<T> setTiles(List<T> tiles){
+		this.tiles = tiles;
+		return this;
+	}
 
-	protected void createMap(MapBoard map) {
+	protected void createMap(MapBoard<T> map) {
 		buildLand(map);
 		createForest(map);
 		placeResources(map);
 		createStartLocations(map);
 	}
 	
-	private void placeResources(MapBoard map){
+	private void placeResources(MapBoard<T> map){
 		
 	}
 	
-	private void createForest(MapBoard map){
+	private void createForest(MapBoard<T> map){
 		
 	}
 	
-	private void buildLand(MapBoard map){
+	private void buildLand(MapBoard<T> map){
 		switch(type){
 		case ISLAND:
 			buildIslandMap(map);
@@ -148,18 +161,18 @@ public class MapBuilder {
 		}
 	}
 	
-	private void buildRandomMap(MapBoard map) {
-		ArrayList<AmTile> tiles = map.allTiles();
+	private void buildRandomMap(MapBoard<T> map) {
+		List<T> tiles = map.allTiles();
 		Random rand = new Random();
-		for (AmTile t : tiles) {
+		for (T t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.values()[rand.nextInt(Terrain.Elevation.values().length)]);
 		}
 	}
 
-	private void buildLandMassMap(MapBoard map) {
-		ArrayList<AmTile> tiles = map.allTiles();
+	private void buildLandMassMap(MapBoard<T> map) {
+		List<T> tiles = map.allTiles();
 
-		for (AmTile t : tiles) {
+		for (T t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.WATER);
 		}
 		int cap = tiles.size()/5;
@@ -173,20 +186,20 @@ public class MapBuilder {
 
 	}
 
-	private void buildLandLockedMap(MapBoard map) {
+	private void buildLandLockedMap(MapBoard<T> map) {
 		buildLandMassMap(map);
 		
 	}
 
-	private void buildContinentalMap(MapBoard map) {
+	private void buildContinentalMap(MapBoard<T> map) {
 		buildIslandMap(map);
 		
 	}
 
-	private void buildIslandMap(MapBoard map) {
-		ArrayList<AmTile> tiles = map.allTiles();
+	private void buildIslandMap(MapBoard<T> map) {
+		List<T> tiles = map.allTiles();
 		
-		for (AmTile t : tiles) {
+		for (T t : tiles) {
 			t.getTerrain().setElevation(Terrain.Elevation.DEEP);
 		}
 		int cap = tiles.size()/4;
@@ -201,7 +214,7 @@ public class MapBuilder {
 		
 	}
 
-	private void createStartLocations(MapBoard map){
+	private void createStartLocations(MapBoard<T> map){
 		 
 	}
 

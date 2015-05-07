@@ -42,6 +42,8 @@ public class HexGrid extends Grid{
 	static int size = 40;  // length in pixels of a side
 	
 	static int h = (int) (Math.sin(Math.toRadians(60))*size);
+	
+	static double sinL = Math.sin(Math.toRadians(60));
 
 	public HexGrid(){
 

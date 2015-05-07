@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import arcanemaster.map.AmTile;
 import arcanemaster.map.Resource;
@@ -31,6 +32,12 @@ public class FxTile extends AmTile{
 		hex = new Polygon();
 		hex.setFill(terrain.getColor());
 		hex.getPoints().addAll(getVertices(vertices));
+	}
+	
+	public FxTile(Grid grid, GridCoordinate location){
+		super(grid, location);
+		hex = new Polygon();
+		hex.getPoints().addAll(getVertices(grid.getVertices(location)));
 	}
 
 	
@@ -60,7 +67,32 @@ public class FxTile extends AmTile{
 	@Override
 	public void setTerrain(Terrain terrain) {
 		super.setTerrain(terrain);
-		hex.setFill(((FxTerrain) terrain).getColor());
+		hex.setFill(getColor());
+	}
+	
+	public void update(){
+		hex.setFill(getColor());
+	}
+	
+	private Paint getColor(){
+		Paint p = Color.WHITE;
+		switch(getTerrain().getElevation()){
+		case DEEP: 		p = Color.BLUE;
+			break;
+		case WATER: 	p = Color.BLUE;
+			break;
+		case PLAINS: 	p = Color.GREEN;
+			break;
+		case HILLS: 	p = Color.DARKOLIVEGREEN;
+			break;
+		case MOUNTAINS: p = Color.GREY;
+			break;
+		case HIGH: 		p = Color.GREY;
+			break;
+		default: 		p = Color.BLACK;
+			break;
+		}
+		return p;
 	}
 
 	private Double[] getVertices(Point[] points){
