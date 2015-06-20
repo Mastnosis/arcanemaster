@@ -78,8 +78,6 @@ public class FxUnitEditor extends Application {
 		column1.setHalignment(HPos.RIGHT);
 		grid.getColumnConstraints().add(column1);
 		
-		RowConstraints row1 = new RowConstraints();
-		row1.setValignment(VPos.TOP);
 		
 		
 		Text scenetitle = new Text("Unit Editor");
@@ -97,11 +95,11 @@ public class FxUnitEditor extends Application {
 		grid.add(lblSightrange, 0, 9);
 		grid.add(lblAttack,0, 10);
 		
-		lblInfo.setAlignment(Pos.TOP_RIGHT);
-		grid.add(lblInfo, 0, 11);
-		grid.add(lblLore, 0, 12);
 		
-		grid.getRowConstraints().add(11, row1);
+		grid.add(lblInfo, 0, 11);
+		GridPane.setValignment(lblInfo, VPos.TOP);
+		grid.add(lblLore, 0, 12);
+		GridPane.setValignment(lblLore, VPos.TOP);
 		
 		grid.add(tfFilename, 1,1);
 		grid.add(tfName, 1, 2);
