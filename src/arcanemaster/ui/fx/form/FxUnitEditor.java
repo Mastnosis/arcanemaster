@@ -3,8 +3,10 @@ package arcanemaster.ui.fx.form;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,8 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -51,6 +55,9 @@ public class FxUnitEditor extends Application {
 	ComboBox<String> cbType = new ComboBox<String>();
 	ComboBox<String> cbRace = new ComboBox<String>();
 	ComboBox<Integer> cbBuild = new ComboBox<Integer>();
+	ComboBox<Integer> cbSight = new ComboBox<Integer>();
+	ComboBox<String> cbMoveType = new ComboBox<String>();
+	ComboBox<Integer> cbMoveSpeed = new ComboBox<Integer>();
 	
 	Button btnSave = new Button("Save");;
 	Button btnClear = new Button("Clear");
@@ -61,10 +68,19 @@ public class FxUnitEditor extends Application {
 		primaryStage.setTitle("Arcane Master Unit Editor");
 		
 		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.TOP_LEFT);
+		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(20);
 		grid.setVgap(15);
 		grid.setPadding(new Insets(25, 25, 25, 25));
+		
+		//Right justify column 1
+		ColumnConstraints column1 = new ColumnConstraints();
+		column1.setHalignment(HPos.RIGHT);
+		grid.getColumnConstraints().add(column1);
+		
+		RowConstraints row1 = new RowConstraints();
+		row1.setValignment(VPos.TOP);
+		
 		
 		Text scenetitle = new Text("Unit Editor");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -84,6 +100,8 @@ public class FxUnitEditor extends Application {
 		lblInfo.setAlignment(Pos.TOP_RIGHT);
 		grid.add(lblInfo, 0, 11);
 		grid.add(lblLore, 0, 12);
+		
+		grid.getRowConstraints().add(11, row1);
 		
 		grid.add(tfFilename, 1,1);
 		grid.add(tfName, 1, 2);
@@ -246,8 +264,35 @@ public class FxUnitEditor extends Application {
 		
 		grid.add(hbUpkeep, 1, 7);
 		
+		HBox hbMove = new HBox(10);
+		cbMoveType.getItems().addAll("Walk", "Amphibious", "Water", "Flying");
+		cbMoveType.setValue("Walk");
+		hbMove.getChildren().add(cbMoveType);
+		cbMoveSpeed.getItems().addAll(0,1,2,3,4,5,6,7,8,9);
+		cbMoveSpeed.setValue(2);
+		hbMove.getChildren().add(cbMoveSpeed);
+		grid.add(hbMove, 1, 8);
 		
+		cbSight.getItems().addAll(0,1,2,3,4,5,6,7,8,9);
+		//cbBuild.setEditable(true);
+		cbSight.setValue(2);
+		grid.add(cbSight, 1, 9);
 		
+		TextField tfAttack = new TextField("0"){
+			@Override public void replaceText(int start, int end, String text) {
+				if (text.matches(NUMBER)) {
+					super.replaceText(start, end, text);
+				}
+			}
+
+			@Override public void replaceSelection(String text) {
+				if (text.matches(NUMBER)) {
+					super.replaceSelection(text);
+				}
+			}
+		};
+		tfAttack.setPrefColumnCount(2);
+		grid.add(tfAttack, 1, 10);
 		
 		grid.add(taInfo, 1, 11);
 		grid.add(taLore, 1, 12);
